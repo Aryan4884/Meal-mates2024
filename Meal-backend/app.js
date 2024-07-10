@@ -27,4 +27,4 @@ app.use(cookieParser());
 // Routes
 app.use("/api/users", userRouter); // Example route setup
 
-export default app;
+export { app };
