@@ -12,7 +12,7 @@ const app = express();
 // Configure CORS middleware
 app.use(
   cors({
-    origin: "https://candid-bublanina-0fe3a7.netlify.app",
+    origin: "https://elaborate-crisp-5378ae.netlify.app",
     credentials: true, // Enable credentials (cookies, authorization headers)
   })
 );
