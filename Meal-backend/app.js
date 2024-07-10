@@ -33,12 +33,16 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// routes import
+// Import routes
 import userRouter from "./routes/user.routes.js";
 
-// routes declaration
+// Use routes
 app.use("/api/users", userRouter);
 
-// eg. http://localhost:8000/api/v1/users/register
+// Start server
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 export { app };
