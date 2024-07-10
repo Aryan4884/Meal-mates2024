@@ -8,9 +8,22 @@ dotenv.config();
 
 const app = express();
 
+// Allowed origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://668e4ff9ecf8051e536f82d3--elaborate-crisp-5378ae.netlify.app",
+];
+
+// Configure CORS middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
