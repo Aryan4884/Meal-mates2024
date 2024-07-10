@@ -1,7 +1,7 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
+import dotenv from "dotenv";
 
 // Load environment variables
 dotenv.config();
@@ -38,11 +38,5 @@ import userRouter from "./routes/user.routes.js";
 
 // Use routes
 app.use("/api/users", userRouter);
-
-// Start server
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
 
 export { app };
