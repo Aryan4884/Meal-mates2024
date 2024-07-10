@@ -1,42 +1,30 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
 import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import userRouter from "./routes/user.routes.js";
 
 // Load environment variables
 dotenv.config();
 
 const app = express();
 
-// Allowed origins
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://668e4ff9ecf8051e536f82d3--elaborate-crisp-5378ae.netlify.app",
-];
-
 // Configure CORS middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Enable credentials
+    origin: "https://elaborate-crisp-5378ae.netlify.app",
+    credentials: true, // Enable credentials (cookies, authorization headers)
   })
 );
 
+// Middleware for parsing JSON and URL-encoded bodies
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(express.static("public"));
+
+// Middleware for parsing cookies
 app.use(cookieParser());
 
-// Import routes
-import userRouter from "./routes/user.routes.js";
+// Routes
+app.use("/api/users", userRouter); // Example route setup
 
-// Use routes
-app.use("/api/users", userRouter);
-
-export { app };
+export default app;
